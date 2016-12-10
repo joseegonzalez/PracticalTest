@@ -7,7 +7,8 @@ import android.util.Log;
 import java.io.IOException;
 
 import nyc.c4q.josegonzalez.practicaltest.Internet.VineService;
-import okhttp3.ResponseBody;
+import nyc.c4q.josegonzalez.practicaltest.Model.Data;
+import nyc.c4q.josegonzalez.practicaltest.Model.VineInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,15 +29,16 @@ public class VineActivity extends AppCompatActivity {
                 .build();
         VineService service = retrofit.create(VineService.class);
 
-        Call<ResponseBody> call = service.getRecord();
+        Call<VineInfo> call = service.getData();
 
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<VineInfo>() {
 
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<VineInfo> call, Response<VineInfo> response) {
                 try {
                     if(response.isSuccessful()) {
-                        Log.d(TAG, "Success: " + response.body().string());
+                        Log.d(TAG, "Success: " + response.body());
+                        Log.d(TAG, "Size: " + Data.getSize());
                     } else {
                         Log.d(TAG, "Error" + response.errorBody().string());
                     }
@@ -46,7 +48,7 @@ public class VineActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<VineInfo> call, Throwable t) {
                 // Something went completely wrong (like no internet connection)
                 Log.d("Error", t.getMessage());
             }

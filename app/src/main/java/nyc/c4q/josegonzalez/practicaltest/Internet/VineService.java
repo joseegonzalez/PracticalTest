@@ -1,6 +1,6 @@
 package nyc.c4q.josegonzalez.practicaltest.Internet;
 
-import okhttp3.ResponseBody;
+import nyc.c4q.josegonzalez.practicaltest.Model.VineInfo;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -11,5 +11,5 @@ import retrofit2.http.GET;
 public interface VineService {
 
     @GET("918753190470619136")
-    Call<ResponseBody> getRecord();
+    Call<VineInfo> getData();
 }
